@@ -8,8 +8,12 @@ from app.utils import extract_text_from_pdf, chunk_text, ask_ollama, save_chunks
 from typing import List, Dict
 import time
 
-INDEX_FILE = "faiss_store/index.faiss"
-CHUNKS_FILE = "faiss_store/chunks.txt"
+FAISS_STORE_DIR = "faiss_store"
+INDEX_FILE = os.path.join(FAISS_STORE_DIR, "index.faiss")
+CHUNKS_FILE = os.path.join(FAISS_STORE_DIR, "chunks.txt")
+
+# Create faiss_store directory if it doesn't exist
+os.makedirs(FAISS_STORE_DIR, exist_ok=True)
 
 model = SentenceTransformer("all-MiniLM-L6-v2")
 index = None
